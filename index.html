@@ -1,29 +1,118 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pengumuman Kelulusan - SD Katolik Frateran II</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Pengumuman Kelulusan SD Katolik Frateran II</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f0f8ff, #e6e6fa);
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2e8b57;
+    }
+    input {
+      padding: 10px;
+      width: 80%;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #2e8b57;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #246b45;
+    }
+    .result {
+      margin-top: 20px;
+      display: none;
+    }
+    .surprise {
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <img src="logo-sekolah.png" alt="Logo Sekolah" class="logo" />
-    <h1>Pengumuman Kelulusan</h1>
-    <h2>SD Katolik Frateran II Kediri</h2>
-    <p class="subtitle">Tahun Ajaran 2024/2025</p>
-
-    <div class="form">
-      <input type="text" id="nama" placeholder="Nama Lengkap" />
-      <input type="text" id="nisn" placeholder="NISN" />
-      <button onclick="cekKelulusan()">Cek Kelulusan</button>
-    </div>
-
-    <div class="hasil" id="hasil"></div>
-    <p class="catatan">Catatan: Pengambilan Surat Keterangan Lulus pada hari <strong>Selasa, 3 Juni 2025</strong> di sekolah.</p>
+    <h1>Pengumuman Kelulusan<br>SD Katolik Frateran II<br>Tahun Ajaran 2024/2025</h1>
+    <p>Masukkan Nama Lengkap dan NISN:</p>
+    <input type="text" id="nama" placeholder="Nama Lengkap">
+    <input type="text" id="nisn" placeholder="NISN">
+    <button onclick="cekKelulusan()">Cek Kelulusan</button>
+    <div class="result" id="hasil"></div>
   </div>
 
-  <script src="data.js"></script>
-  <script src="script.js"></script>
+  <script>
+    const dataSiswa = [
+      { nama: "ABIGAIL KARUNIASARI PRASETYO", nisn: "0139772638", lahir: "2013-04-23", status: "LULUS" },
+      { nama: "ALESSANDRO DANISWORO", nisn: "0122462575", lahir: "2013-12-22", status: "LULUS" },
+      { nama: "ANISA DESITA SARI", nisn: "0127009070", lahir: "2012-12-28", status: "LULUS" },
+      { nama: "CHATARINA GIVEN ZEFANYA", nisn: "3121650514", lahir: "2012-11-16", status: "LULUS" },
+      { nama: "DENDIS ARCHER PUTRA ANGGARA", nisn: "0137907979", lahir: "2013-03-13", status: "LULUS" },
+      { nama: "GISSELA MARGARETHA", nisn: "0122792274", lahir: "2012-07-25", status: "LULUS" },
+      { nama: "IMANUEL YUA BEGAWAN KHARISMA PUTRA", nisn: "3125674472", lahir: "2012-08-10", status: "LULUS" },
+      { nama: "IMMANUEL SAMUEL AGAPE RINALDI", nisn: "0124686340", lahir: "2012-04-24", status: "LULUS" },
+      { nama: "JESSICA CAHYA VIOLA PUTRI KARIN", nisn: "0128930717", lahir: "2012-11-30", status: "LULUS" },
+      { nama: "JOSEPHYNA SETIA AMANDA SARI", nisn: "3127577018", lahir: "2012-06-05", status: "LULUS" },
+      { nama: "KENZIE RIZKY KUMARA", nisn: "0122602616", lahir: "2012-07-20", status: "LULUS" },
+      { nama: "MARIA NISMARA SETYANING SABDO", nisn: "0125943296", lahir: "2012-08-28", status: "LULUS" },
+      { nama: "MARSYA ARUM VANNESA PUTRI", nisn: "0138304662", lahir: "2013-01-31", status: "LULUS" },
+      { nama: "NI WAYAN STACIE ALETIA NUGRAHA", nisn: "0124263031", lahir: "2012-07-18", status: "LULUS" },
+      { nama: "OKTAVIAN PUTRA TRISUSANTO", nisn: "0121377056", lahir: "2012-10-05", status: "LULUS" },
+      { nama: "PANCA WIJAYA PAMUNGKAS", nisn: "3127908299", lahir: "2012-07-31", status: "LULUS" },
+      { nama: "PRABASWARA ADIKARACHMAN", nisn: "0123671411", lahir: "2012-08-28", status: "LULUS" },
+      { nama: "RAFAEL ALVARO", nisn: "0121756011", lahir: "2012-11-30", status: "LULUS" },
+      { nama: "SARAH KIRANA", nisn: "0138411705", lahir: "2013-05-14", status: "LULUS" },
+      { nama: "STEVANUS SATRYA ADELINO", nisn: "0132601843", lahir: "2013-01-05", status: "LULUS" },
+      { nama: "VERYZA ARBY QIRANSHA MAHARANI", nisn: "0134892004", lahir: "2013-10-22", status: "LULUS" }
+    ];
+
+    function cekKelulusan() {
+      const inputNama = document.getElementById("nama").value.trim().toUpperCase();
+      const inputNisn = document.getElementById("nisn").value.trim();
+      const hasil = document.getElementById("hasil");
+
+      const siswa = dataSiswa.find(s => s.nama === inputNama && s.nisn === inputNisn);
+
+      if (siswa) {
+        hasil.innerHTML = `
+          <div class="surprise">
+            <h2>🎉 Selamat!</h2>
+            <p><strong>Nama:</strong> ${siswa.nama}</p>
+            <p><strong>NISN:</strong> ${siswa.nisn}</p>
+            <p><strong>Tanggal Lahir:</strong> ${siswa.lahir}</p>
+            <p><strong>Status:</strong> ${siswa.status}</p>
+            <p><em>Silakan ambil Surat Keterangan Lulus pada <strong>Selasa, 3 Juni 2025</strong> di sekolah.</em></p>
+          </div>
+        `;
+        hasil.style.display = "block";
+      } else {
+        hasil.innerHTML = "<p style='color:red;'>Data tidak ditemukan. Periksa kembali Nama dan NISN.</p>";
+        hasil.style.display = "block";
+      }
+    }
+  </script>
 </body>
 </html>
