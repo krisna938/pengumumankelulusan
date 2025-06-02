@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pengumuman Kelulusan - SD Katolik Frateran II</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <img src="logo-sekolah.png" alt="Logo Sekolah" class="logo" />
+    <h1>Pengumuman Kelulusan</h1>
+    <h2>SD Katolik Frateran II Kediri</h2>
+    <p class="subtitle">Tahun Ajaran 2024/2025</p>
+
+    <div class="form">
+      <input type="text" id="nama" placeholder="Nama Lengkap" />
+      <input type="text" id="nisn" placeholder="NISN" />
+      <button onclick="cekKelulusan()">Cek Kelulusan</button>
+    </div>
+
+    <div class="hasil" id="hasil"></div>
+    <p class="catatan">Catatan: Pengambilan Surat Keterangan Lulus pada hari <strong>Selasa, 3 Juni 2025</strong> di sekolah.</p>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
